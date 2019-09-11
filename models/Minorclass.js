@@ -3,9 +3,9 @@ const mongoose = require('../db/connection');
 
 const MinorclassSchema = mongoose.Schema({
    
-    major_object_class_code: {
+    agency_id: {
         type: mongoose.Schema.Types.Number,
-        ref: "Majorclass"
+        ref: "Summary"
     },
     object_class_code: Number,
     object_class_name: String,
