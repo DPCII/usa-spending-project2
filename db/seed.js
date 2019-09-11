@@ -11,10 +11,13 @@ Summary.deleteMany({}).then(() => {
     console.log("Deleted all agency summary documents");
 
     Summary.create(summaryData).then(res => console.log(res));
+}).then(() => {
+    
+    Majorclass.deleteMany({}).then(() => {
+        console.log("Deleted all Major Class documents");
+
+        Majorclass.create(majorclassData).then(res => console.log(res));
+    })
+
 })
 
-Majorclass.deleteMany({}).then(() => {
-    console.log("Deleted all Major Class documents");
-
-    Majorclass.create(majorclassData).then(res => console.log(res));
-})
