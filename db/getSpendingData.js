@@ -4,25 +4,13 @@ const fs = require('fs')
 let baseURL = `https://api.usaspending.gov/api/v2/`
 let year = 2017
 let agencyId = 1146
+exports.agencyId = agencyId;
 let agencyRef = `references/agency/${agencyId}/`
 let majorobjectclasscode = 20
 
-// let peopleCount = 20
-
-// let ids = []
-
-
-// build 20 urls to make calls to, and return array of promises with those urls
-// let calls = ids.map(id => `${baseURL}${id}`)
-// .map(url => axios.get(url))
-
-// let calls = `${baseURL}${agencyRef}`
-// calls.map(el => axios.get(el))
-
 axios.get(`${baseURL}${agencyRef}`)
 
-
-// execute all promises, writing to disk if successful
+// Promise chain to write raw json 
 
 .then(success => {
 	console.log(success)

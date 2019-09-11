@@ -1,6 +1,5 @@
 // Connect to DB
 const mongoose = require('../db/connection');
-const Summary = require('../models/Summary');
 
 const MajorclassSchema = mongoose.Schema({
    
