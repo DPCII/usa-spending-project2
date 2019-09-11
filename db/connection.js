@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = Promise
 
-mongoose.connect('mongodb://localhost/tv-browser', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/usa-spending', { useNewUrlParser: true })
 .then((conn) => {
 	console.log(`connected to mongodb on ${conn.connections[0].name} db`)
 })
