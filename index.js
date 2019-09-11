@@ -3,8 +3,8 @@ const app = express();
 const parser = require('body-parser');
 
 // Requiring controllers
-const summaryRoutes = require('./routes/agency_summary');
-const objectClassRoutes = require('./routes/object_class');
+const summaryRoutes = require('./routes/summary');
+const objectClassRoutes = require('./routes/majorclass');
 
 // The coded needed to make body-parser work.
 app.use(parser.urlencoded({extended: true}))

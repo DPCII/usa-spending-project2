@@ -1,20 +1,20 @@
 // Import Models!
-const Person = require("../models/Person");
-const Show = require("../models/Show");
+const Summary = require("../models/Summary");
+const Majorclass = require("../models/Majorclass");
 
 // Import raw data!
-const personData = require("../db/people.json");
-const showData = require('../db/shows.json');
+const summaryData = require("../db/summary.json");
+const majorclassData = require('../db/majorclass.json');
 
 //Clear records, test seeding
-Person.deleteMany({}).then(() => {
-    console.log("Deleted all person documents");
+Summary.deleteMany({}).then(() => {
+    console.log("Deleted all agency summary documents");
 
-    Person.create(personData).then(res => console.log(res));
+    Summary.create(summaryData).then(res => console.log(res));
 })
 
-Show.deleteMany({}).then(() => {
-    console.log("Deleted all show documents");
+Majorclass.deleteMany({}).then(() => {
+    console.log("Deleted all Major Class documents");
 
-    Show.create(showData).then(res => console.log(res));
+    Majorclass.create(majorclassData).then(res => console.log(res));
 })

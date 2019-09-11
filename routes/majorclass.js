@@ -1,7 +1,7 @@
 const express = require('express');
 const majorclassRouter = express.Router();
 
-const majorclassController = require("../controllers/show")
+const majorclassController = require("../controllers/majorclass")
 
 majorclassRouter.get("/", majorclassController.index);
 // majorclassRouter.get("/:name", majorclassController.name);

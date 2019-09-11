@@ -1,31 +1,31 @@
-const Person = require("../models/Person");
+const Summary = require("../models/Summary");
 
 module.exports = {
     index: (req, res) => {
         //Return all people
-        Person.find({}).then(output => res.json(output))
+        Summary.find({}).then(output => res.json(output))
     },
     name: (req, res) => {
-        //Return person by name
-        Person.find({ name: req.params.name }).then(output => res.json(output))
+        //Return Summary by name
+        Summary.find({ name: req.params.name }).then(output => res.json(output))
     },
     id: (req, res) => {
-        //Return person by _id
-        Person.find({ _id: req.params._id }).then(output => res.json(output))
+        //Return Summary by _id
+        Summary.find({ _id: req.params._id }).then(output => res.json(output))
     },
-    newPerson: (req, res) => {
-        //Create new person
-        const newPerson = req.body;
-        Person.create(newPerson).then(output => res.json(output))
+    newSummary: (req, res) => {
+        //Create new Summary
+        const newSummary = req.body;
+        Summary.create(newSummary).then(output => res.json(output))
     },
     update: (req, res) => {
-        //Modify person by _id search
+        //Modify Summary by _id search
         const requestBody = req.body;
-        Person.findOneAndUpdate({ _id: req.params._id }, { requestBody }, { new: true })
+        Summary.findOneAndUpdate({ _id: req.params._id }, { requestBody }, { new: true })
         .then(output => res.json(output))
     },
     delete: (req, res) => {
-        //Delete person entry by _id search
-        Person.findOneAndDelete({ _id: req.params._id }).then(output => res.json(output))
+        //Delete Summary entry by _id search
+        Summary.findOneAndDelete({ _id: req.params._id }).then(output => res.json(output))
     },
 }

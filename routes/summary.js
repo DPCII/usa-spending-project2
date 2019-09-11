@@ -1,13 +1,13 @@
 const express = require('express');
-const personRouter = express.Router();
+const summaryRouter = express.Router();
 
-const personController = require("../controllers/person")
+const summaryController = require("../controllers/summary");
 
-personRouter.get("/", personController.index);
-personRouter.get("/:name", personController.name);
-personRouter.get("/:id", personController.id);
-personRouter.post("/", personController.newPerson);
-personRouter.put("/:id", personController.update);
-personRouter.delete("/:id", personController.delete);
+summaryRouter.get("/", summaryController.index);
+// summaryRouter.get("/:name", summaryController.name);
+// summaryRouter.get("/:id", summaryController.id);
+// summaryRouter.post("/", summaryController.newPerson);
+// summaryRouter.put("/:id", summaryController.update);
+// summaryRouter.delete("/:id", summaryController.delete);
 
-module.exports = personRouter;
+module.exports = summaryRouter;
