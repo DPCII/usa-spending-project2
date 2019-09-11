@@ -1,17 +1,23 @@
 const express = require('express');
 const app = express();
 const parser = require('body-parser');
+const cors = require('cors');
 
 // Requiring controllers
 const summaryRoutes = require('./routes/summary');
 const objectClassRoutes = require('./routes/majorclass');
+const minorObjectClassRoutes = require('./routes/minorclass');
+
+// Cross-origin!
+app.use(cors())
 
 // The coded needed to make body-parser work.
 app.use(parser.urlencoded({extended: true}))
 app.use(parser.json());
 
 // Instantiating controllers
-app.use('/api/agency_summary/', summaryRoutes);
-app.use('/api/object_class/', objectClassRoutes);
+app.use('/api/agency_summary', summaryRoutes);
+app.use('/api/object_class', objectClassRoutes);
+app.use('/api/minor_object_class', minorObjectClassRoutes);
 
 app.listen(4000, () => console.log('Server running on port 4000!'))
