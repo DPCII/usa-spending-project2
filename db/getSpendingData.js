@@ -2,7 +2,11 @@ const axios = require('axios')
 const fs = require('fs')
 
 let baseURL = `https://api.usaspending.gov/api/v2/`
-let agencyRef = `references/toptier_agencies/`
+let year = 2017
+let agencyId = 1146
+let agencyRef = `references/agency/${agencyId}/`
+let majorobjectclasscode = 20
+
 // let peopleCount = 20
 
 // let ids = []
@@ -35,7 +39,7 @@ axios.get(`${baseURL}${agencyRef}`)
 	}) 
 })
 .then(() => {
-	let majorclassurl = `financial_spending/major_object_class/?fiscal_year=2017&funding_agency_id=${1146}`
+	let majorclassurl = `financial_spending/major_object_class/?fiscal_year=${year}&funding_agency_id=${agencyId}`
 	axios.get(`${baseURL}${majorclassurl}`)
 	.then(success => {
 		console.log(success)
@@ -53,7 +57,7 @@ axios.get(`${baseURL}${agencyRef}`)
 	})
 })
 .then(() => {
-	let minorclassurl = `financial_spending/object_class/?fiscal_year=2017&funding_agency_id=1146&major_object_class_code=20`
+	let minorclassurl = `financial_spending/object_class/?fiscal_year=${year}&funding_agency_id=${agencyId}&major_object_class_code=${majorobjectclasscode}`
 	axios.get(`${baseURL}${minorclassurl}`)
 	.then(success => {
 		console.log(success)
