@@ -1,6 +1,6 @@
 # USA Spending Assistant API
 
-This API delivers detailed data about the spending within the Federal Agencies of the US Government. It's purpose is simply to make relevant data more approachable to consumers by simplifying and organizing what is a vast landscape of endpoints. The data is sourced from the government resource at api.usaspending.gov. 
+This API delivers detailed data about the spending within the Federal Agencies of the US Government. Its purpose is simply to make relevant data more approachable to consumers by organizing what is a vast landscape of endpoints. The data is sourced from the government resource at api.usaspending.gov. 
 
 ## Technologies Used
 
