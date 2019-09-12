@@ -20,6 +20,10 @@ app.use('/api/agency_summary', summaryRoutes);
 app.use('/api/object_class', objectClassRoutes);
 app.use('/api/minor_object_class', minorObjectClassRoutes);
 
+app.get("/", (req, res) => {
+    res.redirect("/api/agency_summary");
+});
+
 app.set("port", process.env.PORT || 8080);
 
 app.listen(app.get("port"), () => {
