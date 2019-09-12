@@ -20,4 +20,8 @@ app.use('/api/agency_summary', summaryRoutes);
 app.use('/api/object_class', objectClassRoutes);
 app.use('/api/minor_object_class', minorObjectClassRoutes);
 
-app.listen(4000, () => console.log('Server running on port 4000!'))
+app.set("port", process.env.PORT || 8080);
+
+app.listen(app.get("port"), () => {
+  console.log(`PORT: ${app.get("port")}`);
+});
