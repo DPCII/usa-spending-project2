@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <!-- Importing Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>USA Spending Assistant API</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: #6b6b6b;
+            font-family: 'Roboto Slab', serif;
+            line-height: 1.4;
+            font-size: 1.5rem;
+            }
+
+            #app {
+            margin-top: 20px;
+            width: 50%;
+            max-width: 1000px;
+            padding: 0 40px 40px;
+            background: #062f4f;
+            border-radius: 5px;
+            color: #e2e1e7;
+            }
+
+            div {
+                margin-bottom: 2%;
+            }
+
+            .total-budget-amount, .budget-amount, .outlay-amount {
+                color: rgb(201, 184, 89);
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: 500;
+                letter-spacing: .08rem;
+                font-size: 1.7rem;
+            }
+
+          div .budget-amount .description, div .total-budget-amount .description, div .outlay-amount .description {
+                color: white;
+                font-family: 'Roboto Slab', serif;
+                font-weight: 100;
+                font-size: 1.5rem;
+            }
+
+            h1 {
+            color: #e2e1e7;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="app">
+        <h1>USA Spending Assistant API</h1>
+            <div class="agency-name">
+              <span>Agency Name: </span>  {{ info.data[0].agency_name }}
+            </div>
+            <div class="agency-id">
+               <span>Agency ID: </span> {{ info.data[0].agency_id }}
+            </div>
+            <div class="total-budget-amount">
+               <span class="description">Total Budget Authority: </span>  {{ info.data[0].current_total_budget_authority_amount | currencycommas }}
+            </div>
+            <div class="outlay-amount">
+                    <span class="description">Outlay Amount: </span> {{ info.data[0].outlay_amount | currencycommas }}
+                 </div>
+            <div class="budget-amount">
+               <span class="description">Budget Amount: </span> {{ info.data[0].budget_authority_amount | currencycommas }}
+            </div>
+       
+
+    </div>
+
+    <script>
+
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                info: null
+                }
+            },
+            mounted () {
+                axios
+                .get('https://pure-citadel-29970.herokuapp.com/api/agency_summary')
+                .then(response => (this.info = response))
+            },
+            filters: {
+                currencycommas (value) {
+                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+                }
+            }
+            })
+    </script>
+    
+
+  
+</body>
+</html>
