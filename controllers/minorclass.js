@@ -13,8 +13,7 @@ module.exports = {
     id: (req, res) => {
         //Return Minorclass by _id
         Minorclass.findOne({ "_id": req.params.id }, {}).then(output => {
-            res.json(output)
-            console.log(output)
+            res.json(output);
         })
     },
     newMinorclass: (req, res) => {
@@ -28,7 +27,7 @@ module.exports = {
     update: (req, res) => {
         //Modify Minorclass by _id search
         const requestBody = req.body;
-        Minorclass.findOneAndUpdate({ "_id": req.params.id }, { $set: { requestBody } }, { new: true })
+        Minorclass.update({ "_id": req.params.id }, requestBody, { upsert: true, new: true })    
         .then(output => res.json(output))
     },
     delete: (req, res) => {
