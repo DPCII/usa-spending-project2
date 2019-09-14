@@ -1,4 +1,5 @@
 const Minorclass = require("../models/Minorclass");
+let agencyId = require("../db/agency")
 
 module.exports = {
     index: (req, res) => {
@@ -19,7 +20,10 @@ module.exports = {
     newMinorclass: (req, res) => {
         //Create new Minorclass
         const newMinorclass = req.body;
-        Minorclass.create(newMinorclass).then(output => res.json(output))
+        Minorclass.create(newMinorclass).then(() => {
+            Minorclass.updateMany({}, { "agency_id": agencyId }, { upsert: true, multi: true })
+            .then(result => res.json(result))
+        })
     },
     update: (req, res) => {
         //Modify Minorclass by _id search
