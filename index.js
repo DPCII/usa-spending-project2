@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const parser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 // Requiring controllers
 const summaryRoutes = require('./routes/summary');
@@ -19,6 +20,7 @@ app.use(parser.json());
 app.use('/api/agency_summary', summaryRoutes);
 app.use('/api/object_class', objectClassRoutes);
 app.use('/api/minor_object_class', minorObjectClassRoutes);
+app.get('/index.html', (req, res) => { res.sendFile(path.join(__dirname+'/index.html')) })
 
 app.get("/", (req, res) => {
     res.redirect("/api/agency_summary");
