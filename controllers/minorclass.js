@@ -16,7 +16,7 @@ module.exports = {
             console.log(output)
         })
     },
-/*     newMinorclass: (req, res) => {
+    newMinorclass: (req, res) => {
         //Create new Minorclass
         const newMinorclass = req.body;
         Minorclass.create(newMinorclass).then(output => res.json(output))
@@ -30,5 +30,5 @@ module.exports = {
     delete: (req, res) => {
         //Delete Minorclass entry by _id search
         Minorclass.findOneAndDelete({ "_id": req.params.id }).then(output => res.json(output))
-    }, */
+    },
 }
