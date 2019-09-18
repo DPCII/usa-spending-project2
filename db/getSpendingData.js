@@ -8,6 +8,8 @@ let agencyId = 1146
 let agencyRef = `references/agency/${agencyId}/`
 let majorobjectclasscode = 20
 
+// Axios GET request
+
 axios.get(`${baseURL}${agencyRef}`)
 
 // Promise chain to write raw json 

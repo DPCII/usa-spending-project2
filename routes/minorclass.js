@@ -7,7 +7,6 @@ minorclassRouter.get("/:name", minorclassController.name);
 minorclassRouter.put("/byid/:id", minorclassController.update);
 minorclassRouter.get("/byid/:id", minorclassController.id);
 minorclassRouter.post("/", minorclassController.newMinorclass);
-
 minorclassRouter.delete("/:id", minorclassController.delete);
 
 module.exports = minorclassRouter;
