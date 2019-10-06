@@ -4,13 +4,13 @@ const parser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
+// Cross-origin!
+app.use(cors())
+
 // Requiring controllers
 const summaryRoutes = require('./routes/summary');
 const objectClassRoutes = require('./routes/majorclass');
 const minorObjectClassRoutes = require('./routes/minorclass');
-
-// Cross-origin!
-app.use(cors())
 
 // The coded needed to make body-parser work.
 app.use(parser.urlencoded({extended: true}))

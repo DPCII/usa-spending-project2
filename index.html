@@ -10,6 +10,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>USA Spending Assistant API</title>
     <style>
+    @media(min-width: 1px){
+            .tiny-screen {
+                display: visible;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 75px;
+            }
+            .app {
+                display: none;
+            }
+        }
+
+    @media(min-width: 365px) {
+
+        .tiny-screen {
+            display: none;
+        }
+
+        .app {
+            display: visible;
+        }
+
         body {
             display: flex;
             justify-content: center;
@@ -93,11 +116,12 @@
             transform: scale(1.05);
             outline: none;
         }
+    }
     </style>
 
 </head>
 <body>
-
+    <span class="tiny-screen">We're gonna need a bigger screen. If you're on a mobile device, try turning it sideways.</span>
     <div id="app">
         <h1>USA Spending Assistant API</h1>
 
