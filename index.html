@@ -4,6 +4,7 @@
     <!-- Importing Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,6 +98,11 @@
             margin: 5px 0 30px 0;
             font-size: 1.2rem;
         }
+
+        #select-agency-id {
+            width: 100%;
+        }
+
         #submit-button {
             background-color: #110e0e;
             padding: 10px;
@@ -134,10 +140,13 @@
 <body>
     <span class="tiny-screen">We're gonna need a bigger screen. If you're on a mobile device, try turning it sideways.</span>
     <div id="app">
-        <h1>Federal Agency Budget API</h1>
+        <h1>Federal Agency Budget API (2018)</h1>
 
         <!-- This should probably be called from API, fields extracted, and generated in JS -->
-        <section class="agency-selector">
+        <section class="agency-viewer">
+            <select v-on:change="callNewAgency" name="agency-id" id="select-agency-id">
+                <option v-for="agency in allIds" :value="agency.id">{{agency.name}}</option>
+            </select>
             <select v-on:change="optionStateChange" name="agency-id" id="select-box">
                 <option value="id1">Summary</option>
                 <option value="id2">Spending Categories</option>
@@ -206,6 +215,10 @@
     
 
     <script>
+        // const axios = require('axios')
+        
+
+
 
         const summarySelector = document.getElementById('id1');
         const objectSelector = document.getElementById('id2');
@@ -217,22 +230,34 @@
         let majorURL = `object_class/`
         let minorURL = `minor_object_class/`
         const baseURL = `https://pure-citadel-29970.herokuapp.com/api/`
-
+        
         let apiURL = `https://pure-citadel-29970.herokuapp.com/api/agency_summary`
         let objectURL = `https://pure-citadel-29970.herokuapp.com/api/object_class`;
         let minorObjectURL = `https://pure-citadel-29970.herokuapp.com/api/minor_object_class`;
         
+        let agenciesListUrl = "references/toptier_agencies/"
+        let allAgencyIds = []
+        let sourceURL = `https://api.usaspending.gov/api/v2/`
         // let year = 2017
         // let agencyId = 1146
         // let agencyRef = `references/agency/${agencyId}/`
         // let majorobjectclasscode = 20
 
+        axios.get(`${sourceURL}${agenciesListUrl}`)
+        .then(success => {
+            success.data.results.map(el => {
+                return allAgencyIds.push({"id": el.agency_id, "name": el.agency_name})
+            })
+        })
+        .then(() => console.log(allAgencyIds))
 
         // Begin Vue.js
         new Vue({
             el: '#app',
             data () {
                 return {
+                    allIds: allAgencyIds,
+                    currentId: null,
                     summary: null,
                     summaryDisplay: true,
                     majorObjectDisplay: false,
@@ -240,6 +265,9 @@
                 }
             },    
             methods: {
+                callNewAgency: function(opt) {
+                    this.currentId = opt.target.value
+                },
                 optionStateChange: function (opt){
                     if(opt.target.value === 'id1') {
                         this.summaryDisplay = true;
