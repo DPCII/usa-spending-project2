@@ -8,38 +8,19 @@ let agencyId = 1146
 let agencyRef = `references/agency/${agencyId}/`
 let majorobjectclasscode = 20
 
-
+// Promise chain to write raw json
 
 axios.get(`${baseURL}${agencyRef}`)
-
-// Promise chain to write raw json 
-
 .then(success => {
 	let collectedData = success.data.results
-	let stringified = JSON.stringify(collectedData)
-	fs.writeFile(__dirname + '/summary.json', stringified, 'utf8', (err) => {
-		if(err) {
-			console.error(err)
-		}
-		else {
-			console.log(`successfully wrote ${collectedData.length} records to db/summary.json`)
-		}
-	}) 
+    this.summary = collectedData
 })
 .then(() => {
 	let majorclassurl = `financial_spending/major_object_class/?fiscal_year=${year}&funding_agency_id=${agencyId}`
 	axios.get(`${baseURL}${majorclassurl}`)
 	.then(success => {
 		let collectedData = success.data.results
-		let stringified = JSON.stringify(collectedData)
-		fs.writeFile(__dirname + '/majorclass.json', stringified, 'utf8', (err) => {
-			if(err) {
-				console.error(err)
-			}
-			else {
-				console.log(`successfully wrote ${collectedData.length} records to db/majorclass.json`)
-			}
-		}) 
+		this.summaryObj = collectedData
 	})
 })
 .then(() => {
@@ -47,15 +28,7 @@ axios.get(`${baseURL}${agencyRef}`)
 	axios.get(`${baseURL}${minorclassurl}`)
 	.then(success => {
 		let collectedData = success.data.results
-		let stringified = JSON.stringify(collectedData)
-		fs.writeFile(__dirname + '/minorclass.json', stringified, 'utf8', (err) => {
-			if(err) {
-				console.error(err)
-			}
-			else {
-				console.log(`successfully wrote ${collectedData.length} records to db/minorclass.json`)
-			}
-		}) 
+        this.summaryMinorObj = collectedData
 	})
 })
 .catch(err => {

@@ -1,0 +1,123 @@
+@media(min-width: 1px){
+    .tiny-screen {
+        display: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 75px;
+    }
+    div #app {
+        display: none;
+    }
+}
+
+@media(min-width: 365px) {
+
+.tiny-screen {
+    display: none;
+}
+
+.app {
+    display: visible;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background: #6b6b6b;
+    font-family: 'Roboto Slab', serif;
+    line-height: 1.4;
+    font-size: 1.5rem;
+    }
+
+#app {
+    margin-top: 20px;
+    width: 365px;
+    padding: 0 40px 40px;
+    background: #062f4f;
+    border-radius: 5px;
+    color: #e2e1e7;
+    box-shadow: #b2b1b4 1px 0px 3px 2px;
+}
+
+div {
+    margin-bottom: 2%;
+}
+
+.number-response {
+    color: rgb(201, 184, 89);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    letter-spacing: .08rem;
+    font-size: 1.7rem;
+    text-shadow: black 1px 1px 1px;
+}
+
+div .number-response .description {
+    color: #e2e1e7;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 100;
+    font-size: 1.5rem;
+}
+
+.agency-info {
+    color: gray;
+    font-family: Verdana, Tahoma, sans-serif;
+    letter-spacing: .2rem;
+    text-shadow: black 1px 1px 1px;
+}
+
+div .agency-info .description {
+    color: #e2e1e7;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 100;
+    font-size: 1.5rem;
+}
+
+h1 {
+    color: #e2e1e7;
+    text-shadow: black 1px 1.5px 3px;
+}
+
+select {
+    width: 200px;
+    height: 40px;
+    margin: 5px 0 30px 0;
+    font-size: 1.2rem;
+}
+
+#select-agency-id {
+    width: 100%;
+}
+
+#submit-button {
+    background-color: #110e0e;
+    padding: 10px;
+    border-radius: 10px;
+    color:#e2e1e7;
+    font-size: 1.2rem;
+    outline: none;
+}
+#submit-button:active {
+    background-color: rgb(114, 134, 114);
+    transform: scale(.95);
+    outline: none;
+}
+#submit-button:hover {
+    background-color: rgb(136, 136, 116);
+    transform: scale(1.05);
+    outline: none;
+}
+}
+
+@media(min-width: 568px){
+#app {
+    width: 568px;
+}
+}
+
+@media(min-width: 768px){
+#app {
+    width: 768px;
+}
+}
