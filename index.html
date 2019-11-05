@@ -1,189 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>  
-    <!-- Importing Vue.js -->
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Importing Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Importing Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script> -->
+
     <title>Federal Agency Budget API</title>
     <style>
-    @media(min-width: 1px){
-            .tiny-screen {
-                display: visible;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 75px;
-            }
-            div #app {
-                display: none;
-            }
+        @media(min-width: 1px){
+        .tiny-screen {
+            display: visible;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 75px;
         }
+        div #app {
+            display: none;
+        }
+    }
 
     @media(min-width: 365px) {
 
-        .tiny-screen {
-            display: none;
+    .tiny-screen {
+        display: none;
+    }
+
+    .app {
+        display: visible;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        background: #6b6b6b;
+        font-family: 'Roboto Slab', serif;
+        line-height: 1.4;
+        font-size: 1.5rem;
         }
 
-        .app {
-            display: visible;
-        }
+    #app {
+        margin-top: 20px;
+        width: 365px;
+        padding: 0 40px 40px;
+        background: #062f4f;
+        border-radius: 5px;
+        color: #e2e1e7;
+        box-shadow: #b2b1b4 1px 0px 3px 2px;
+    }
 
-        body {
-            display: flex;
-            justify-content: center;
-            background: #6b6b6b;
-            font-family: 'Roboto Slab', serif;
-            line-height: 1.4;
-            font-size: 1.5rem;
-            }
+    div {
+        margin-bottom: 4%;
+    }
 
-        #app {
-            margin-top: 20px;
-            width: 365px;
-            padding: 0 40px 40px;
-            background: #062f4f;
-            border-radius: 5px;
-            color: #e2e1e7;
-            box-shadow: #b2b1b4 1px 0px 3px 2px;
-        }
+    .number-response {
+        color: rgb(201, 184, 89);
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 500;
+        letter-spacing: .08rem;
+        font-size: 1.7rem;
+        text-shadow: black 1px 1px 1px;
+    }
 
-        div {
-            margin-bottom: 2%;
-        }
+    div .number-response .description {
+        color: #e2e1e7;
+        font-family: 'Roboto Slab', serif;
+        font-weight: 100;
+        font-size: 1.5rem;
+    }
 
-        .number-response {
-            color: rgb(201, 184, 89);
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 500;
-            letter-spacing: .08rem;
-            font-size: 1.7rem;
-            text-shadow: black 1px 1px 1px;
-        }
+    .agency-info {
+        color: rgb(241, 235, 224);
+        font-family: Verdana, Tahoma, sans-serif;
+        letter-spacing: .2rem;
+        text-shadow: black 1px 1px 1px;
+        word-wrap: break-word;
+    }
 
-        div .number-response .description {
-            color: #e2e1e7;
-            font-family: 'Roboto Slab', serif;
-            font-weight: 100;
-            font-size: 1.5rem;
-        }
+    div .agency-info .description {
+        color: #e2e1e7;
+        font-family: 'Roboto Slab', serif;
+        font-weight: 100;
+        font-size: 1.5rem;
+    }
 
-        .agency-info {
-            color: gray;
-            font-family: Verdana, Tahoma, sans-serif;
-            letter-spacing: .2rem;
-            text-shadow: black 1px 1px 1px;
-        }
+    h1 {
+        color: #e2e1e7;
+        text-shadow: black 1px 1.5px 3px;
+    }
 
-        div .agency-info .description {
-            color: #e2e1e7;
-            font-family: 'Roboto Slab', serif;
-            font-weight: 100;
-            font-size: 1.5rem;
-        }
+    select {
+        width: 200px;
+        height: 40px;
+        margin: 5px 0 30px 0;
+        font-size: 1.2rem;
+    }
 
-        h1 {
-            color: #e2e1e7;
-            text-shadow: black 1px 1.5px 3px;
-        }
+    #select-agency-id {
+        width: auto;
+        max-width: 100%;
+        display: block;
+    }
 
-        select {
-            width: 200px;
-            height: 40px;
-            margin: 5px 0 30px 0;
-            font-size: 1.2rem;
-        }
-        #submit-button {
-            background-color: #110e0e;
-            padding: 10px;
-            border-radius: 10px;
-            color:#e2e1e7;
-            font-size: 1.2rem;
-            outline: none;
-        }
-        #submit-button:active {
-            background-color: rgb(114, 134, 114);
-            transform: scale(.95);
-            outline: none;
-        }
-        #submit-button:hover {
-            background-color: rgb(136, 136, 116);
-            transform: scale(1.05);
-            outline: none;
-        }
+    #submit-button {
+        background-color: #110e0e;
+        padding: 10px;
+        border-radius: 10px;
+        color:#e2e1e7;
+        font-size: 1.2rem;
+        outline: none;
+    }
+    #submit-button:active {
+        background-color: rgb(114, 134, 114);
+        transform: scale(.95);
+        outline: none;
+    }
+    #submit-button:hover {
+        background-color: rgb(136, 136, 116);
+        transform: scale(1.05);
+        outline: none;
+    }
     }
 
     @media(min-width: 568px){
-        #app {
-            width: 568px;
-        }
+    #app {
+        width: 568px;
+    }
     }
 
     @media(min-width: 768px){
-        #app {
-            width: 768px;
-        }
+    #app {
+        width: 768px;
     }
+}
     </style>
-
 </head>
 <body>
+
+
     <span class="tiny-screen">We're gonna need a bigger screen. If you're on a mobile device, try turning it sideways.</span>
     <div id="app">
-        <h1>Federal Agency Budget API</h1>
+        <h1>Federal Agency Budget API ({{this.year}})</h1>
 
-        <!-- This should probably be called from API, fields extracted, and generated in JS -->
-        <section class="agency-selector">
-            <select v-on:change="optionStateChange" name="agency-id" id="select-box">
-                <option value="id1">Summary</option>
-                <option value="id2">Spending Categories</option>
-                <option value="id3">Spending Sub-Categories</option>
+        <section class="agency-viewer">
+            <select v-on:change="callNewAgency" name="agency-id" id="select-agency-id">
+                    <option>Select from the following Federal Agencies...</option>
+                <option v-for="agency in allIds" :value="agency.id">{{agency.name}}</option>
             </select>
+           
        
-            <template id="summary-app" v-if="summaryDisplay">
+            <template id="summary-app" v-if="summary">
                 <div class="agency-info">
-                    <span class="description">Agency Name: </span>  {{ summary.data[0].agency_name }}
+                    <span class="description">Agency Name: </span>  {{ summary.agency_name }}
                 </div>
                 <div class="agency-info">
-                    <span class="description">Agency ID: </span> {{ summary.data[0].agency_id }}
+                    <span class="description">Agency Website: </span> {{ summary.website }}
                 </div>
                 <div class="number-response">
-                    <span class="description">Obligated Funds: </span>  {{ summary.data[0].obligated_amount | currencycommas }}
+                    <span class="description">Obligated Funds: </span>  {{ summary.obligated_amount | currencycommas }}
                 </div>
                 <div class="number-response">
-                        <span class="description">Outlay Amount: </span> {{ summary.data[0].outlay_amount | currencycommas }}
+                        <span class="description">Outlay Amount: </span> {{ summary.outlay_amount | currencycommas }}
                         </div>
                 <div class="number-response">
-                    <span class="description">Budget Amount: </span> {{ summary.data[0].budget_authority_amount | currencycommas }}
+                    <span class="description">Budget Amount: </span> {{ summary.budget_authority_amount | currencycommas }}
                 </div>
             </template>
                 
-
-        
-            <template id="major-object-app" v-else-if="majorObjectDisplay">
-                <div class="agency-info">
-                    <span class="description">Agency Name: </span>  {{ summary.data[0].agency_name }}
+            <!-- Need to add onChange listeners to activate api calls and dynamic generation for major and minor class lists after selecting the preceding element.  -->
+         <select v-on:change="callNewMajorObj" name="agency-id" id="select-agency-id">
+                    <option>Select from the following Major Spending Classes...</option>
+                <option v-for="majobjclass in summaryObj" v-if="summaryObj !== null" :value="majobjclass.major_object_class_name">{{majobjclass.major_object_class_name}}</option>
+                <!-- <option value="id2">Spending Categories</option> -->
+                <!-- <option value="id3">Spending Sub-Categories</option> -->
+        </select>
+            <template id="major-object-app" v-if="summary && currentSummaryObj">
+                <!-- <div class="agency-info">
+                    <span class="description">Agency Name: </span>  {{ summary.agency_name }}
                 </div>
                 <div class="agency-info">
-                    <span class="description">Agency ID: </span> {{ summary.data[0].agency_id }}
-                </div>
+                    <span class="description">Agency ID: </span> {{ summary.agency_id }}
+                </div> -->
                 <div class="number-response">
-                    <span class="description">Major Object Class Code: </span>  {{ summaryObj.data[0].major_object_class_code }}
+                    <span class="description">Major Object Class Code: </span>  {{ currentSummaryObj.major_object_class_code }}
                 </div>
+                <!-- <div class="number-response">
+                        <span class="description">Major Object Class Name: </span> {{ currentSummaryObj.major_object_class_name }}
+                </div> -->
                 <div class="number-response">
-                        <span class="description">Major Object Class Name: </span> {{ summaryObj.data[0].major_object_class_name }}
-                </div>
-                <div class="number-response">
-                    <span class="description">Obligated Amount: </span> {{ summaryObj.data[0].obligated_amount | currencycommas }}
+                    <span class="description">Obligated Amount: </span> {{ currentSummaryObj.obligated_amount | currencycommas }}
                 </div>
             </template>    
 
-            <template id="minor-object-app" v-else-if="minorObjectDisplay">
-                    <div class="agency-info">
+            <template id="minor-object-app" v-else-if="">
+                    <!-- <div class="agency-info">
                         <span class="description">Agency Name: </span>  {{ summary.data[0].agency_name }}
                     </div>
                     <div class="agency-info">
@@ -197,89 +213,143 @@
                     </div>
                     <div class="number-response">
                         <span class="description">Obligated Amount: </span> {{ summaryMinorObj.data[0].obligated_amount | currencycommas }}
-                    </div>
+                    </div> -->
                 </template>    
        
         </section>
 
     </div> 
     
-
     <script>
 
-        const summarySelector = document.getElementById('id1');
-        const objectSelector = document.getElementById('id2');
-        const minorObjectSelector = document.getElementById('id3');
-        let selectBox = document.getElementById('select-box')
-        
-        
-        let summaryURL = `agency_summary/`
-        let majorURL = `object_class/`
-        let minorURL = `minor_object_class/`
-        const baseURL = `https://pure-citadel-29970.herokuapp.com/api/`
-
-        let apiURL = `https://pure-citadel-29970.herokuapp.com/api/agency_summary`
-        let objectURL = `https://pure-citadel-29970.herokuapp.com/api/object_class`;
-        let minorObjectURL = `https://pure-citadel-29970.herokuapp.com/api/minor_object_class`;
-        
-        // let year = 2017
-        // let agencyId = 1146
-        // let agencyRef = `references/agency/${agencyId}/`
-        // let majorobjectclasscode = 20
-
-
-        // Begin Vue.js
-        new Vue({
-            el: '#app',
-            data () {
-                return {
-                    summary: null,
-                    summaryDisplay: true,
-                    majorObjectDisplay: false,
-                    minorObjectDisplay: false,
-                }
-            },    
-            methods: {
-                optionStateChange: function (opt){
-                    if(opt.target.value === 'id1') {
-                        this.summaryDisplay = true;
-                        this.majorObjectDisplay = false;
-                        this.minorObjectDisplay = false;
-                    } else if (opt.target.value === 'id2') {
-                        this.summaryDisplay = false;
-                        this.majorObjectDisplay = true;
-                        this.minorObjectDisplay = false;
-                    } else if (opt.target.value === 'id3') {
-                        this.summaryDisplay = false;
-                        this.majorObjectDisplay = false;
-                        this.minorObjectDisplay = true;
+            const summarySelector = document.getElementById('id1');
+            const objectSelector = document.getElementById('id2');
+            const minorObjectSelector = document.getElementById('id3');
+            let selectBox = document.getElementById('select-box')
+            
+            
+            let summaryURL = `agency_summary/`
+            let majorURL = `object_class/`
+            let minorURL = `minor_object_class/`
+            const baseURL = `https://pure-citadel-29970.herokuapp.com/api/`
+            
+            let apiURL = `https://pure-citadel-29970.herokuapp.com/api/agency_summary`
+            let objectURL = `https://pure-citadel-29970.herokuapp.com/api/object_class`;
+            let minorObjectURL = `https://pure-citadel-29970.herokuapp.com/api/minor_object_class`;
+            
+    
+            // Populates the dropdown list
+            let agenciesListUrl = "references/toptier_agencies/"
+            let allAgencyIds = []
+            let sourceURL = `https://api.usaspending.gov/api/v2/`
+            //
+    
+            // let year = 2017
+            let agencyRef = `references/agency/${this.currentId}/`
+            let majorobjectclasscode = 20
+    
+    
+            // grab all agency ids and pair them with agency names
+            axios.get(`${sourceURL}${agenciesListUrl}`)
+            .then(success => {
+                success.data.results.map(el => {
+                    return allAgencyIds.push({"id": el.agency_id, "name": el.agency_name})
+                })
+            })
+            // .then(() => {
+            //     axios.get(`${sourceURL}references/agency/${1146}/`)
+            //         .then(success => {
+            //             let collectedData = success.data.results
+            //             this.summary = collectedData
+            //             console.log(this.summary)
+            //         })
+            // })
+    
+            // Begin Vue.js
+            new Vue({
+                el: '#app',
+                data () {
+                    return {
+                        allIds: allAgencyIds,
+                        currentId: 1146,
+                        year: 2017,
+                        summary: null,
+                        summaryObj: null,
+                        currentSummaryObj: null,
+                        // summaryDisplay: true,
+                        // majorObjectDisplay: false,
+                        // minorObjectDisplay: false,
                     }
+                },    
+                methods: {
+                    callNewAgency: function(opt) {
+                        this.currentId = opt.target.value
+                        axios.get(`${sourceURL}references/agency/${this.currentId}/`)
+                        .then(success => {
+                            let collectedData = success.data.results
+                            this.summary = collectedData
+                            this.year = Number(collectedData.active_fy)
+                            console.log(this.summary)
+                        })
+                        .then(() => {
+                            let majorclassurl = `financial_spending/major_object_class/?fiscal_year=${this.year}&funding_agency_id=${this.currentId}`
+                            axios.get(`${sourceURL}${majorclassurl}`)
+                            .then(success => {
+                                let collectedData = success.data.results
+                                this.summaryObj = collectedData
+                                console.log(this.summaryObj)
+                            })
+                        })
+                        .then(() => {
+                            let minorclassurl = `financial_spending/object_class/?fiscal_year=${this.year}&funding_agency_id=${this.currentId}&major_object_class_code=${majorobjectclasscode}`
+                            axios.get(`${sourceURL}${minorclassurl}`)
+                            .then(success => {
+                                let collectedData = success.data.results
+                                this.summaryMinorObj = collectedData
+                                console.log(this.summaryMinorObj)
+                            })
+                        })
+                        .catch(err => {
+                            console.error(err)
+                            console.error('there was probably an issue with the rate limit, try again in 10 seconds or check the error messages above.')
+                        })
+                    },
+                    callNewMajorObj: function(opt) {
+                        let nameSelected = opt.target.value
+                        let resultReduction = this.summaryObj.filter(each => each.major_object_class_name === nameSelected)
+                        this.currentSummaryObj = resultReduction[0]
+                        console.log(this.currentSummaryObj)
+                    },
+                    // optionStateChange: function (opt){
+                    //     if(opt.target.value === 'id1') {
+                    //         this.summaryDisplay = true;
+                    //         this.majorObjectDisplay = false;
+                    //         this.minorObjectDisplay = false;
+                    //     } else if (opt.target.value === 'id2') {
+                    //         this.summaryDisplay = false;
+                    //         this.majorObjectDisplay = true;
+                    //         this.minorObjectDisplay = false;
+                    //     } else if (opt.target.value === 'id3') {
+                    //         this.summaryDisplay = false;
+                    //         this.majorObjectDisplay = false;
+                    //         this.minorObjectDisplay = true;
+                    //     }
+                    // },
                 },
-            },
-            mounted () {
-                axios
-                .get(apiURL)
-                .then(response => (this.summary = response))
-                
-                axios
-                .get(objectURL)
-                .then(response => (this.summaryObj = response))
-                .then(res => console.log(res))
-
-                axios
-                .get(minorObjectURL)
-                .then(response => (this.summaryMinorObj = response))
-            },
-            filters: {
-                currencycommas (value) {
-                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+                mounted () {
+                    
+    
+                },
+                filters: {
+                    currencycommas (value) {
+                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+                    },
                 }
-            }
-        })
-        // End Vue.js
-
-
-    </script>
+            })
+            // End Vue.js
+    
+    
+        </script>
     
 
   
